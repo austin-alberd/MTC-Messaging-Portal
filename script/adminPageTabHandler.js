@@ -1,25 +1,37 @@
+const homeBtn = document.querySelector("#homeBtn")
 const accountManagementBtn = document.querySelector("#accountManagementBtn")
 const notificationsBtn = document.querySelector("#notificationsBtn")
-const systemManagementBtn = document.querySelector('#systemManagementBtn')
+const systemManagementBtn = document.querySelector("#systemManagementBtn")
 
+const home = document.querySelector('#home')
 const accountManagement = document.querySelector('#accountManagement')
 const notifications = document.querySelector('#notifications')
 const systemManagement = document.querySelector('#systemManagement')
 
-systemManagementBtn.addEventListener("click",()=>{
-    accountManagement.style.display ="none"
-    notifications.style.display ="none"
-    systemManagement.style.display ="block"
-})
+const tabs = [
+    { button: homeBtn, panel: home },
+    { button: accountManagementBtn, panel: accountManagement },
+    { button: notificationsBtn, panel: notifications },
+    { button: systemManagementBtn, panel: systemManagement }
+]
 
-notificationsBtn.addEventListener("click",()=>{
-    accountManagement.style.display ="none"
-    systemManagement.style.display ="none"
-    notifications.style.display ="block"
-})
+function setActiveButton(button, isActive) {
+    button.classList.toggle("btn-primary", isActive)
+    button.classList.toggle("btn-outline-primary", !isActive)
+}
 
-accountManagementBtn.addEventListener("click",()=>{
-    notifications.style.display ="none"
-    systemManagement.style.display ="none"
-    accountManagement.style.display="block"
-})
+function showTab(targetPanel) {
+    tabs.forEach(({ button, panel }) => {
+        const isActive = panel === targetPanel
+        panel.classList.toggle("d-none", !isActive)
+        panel.classList.toggle("d-flex", isActive)
+        setActiveButton(button, isActive)
+    })
+}
+
+homeBtn.addEventListener("click", () => showTab(home))
+accountManagementBtn.addEventListener("click", () => showTab(accountManagement))
+notificationsBtn.addEventListener("click", () => showTab(notifications))
+systemManagementBtn.addEventListener("click", () => showTab(systemManagement))
+
+showTab(home)
