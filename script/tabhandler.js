@@ -1,6 +1,6 @@
 const navbar = document.querySelector("#navbar")
 const loginPage = document.querySelector("#loginPage")
-const notificationPageRegular = document.querySelector("#sendANotificationPage")
+const notificationPageRegular = document.querySelector("#notifications_page")
 
 function showLoginPage(){
     navbar.style.display ="none"
